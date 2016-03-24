@@ -28,8 +28,7 @@ defmodule Gm do
 
   def draw_text(%Command{args: args} = command, x0, y0, string)
       when is_integer(x0) and is_integer(y0) and is_binary(string) do
-    string = String.replace(string, ~S|"|, ~S|\"|)
-    %{command | args: args ++ ["-draw", ~s|text #{x0},#{y0} "#{string}"|]}
+    %{command | args: args ++ ["-draw", "text #{x0},#{y0} #{escape(string)}"]}
   end
 
   def fill(%Command{args: args} = command, color) when is_binary(color) do
@@ -44,7 +43,10 @@ defmodule Gm do
   def draw_image(%Command{args: args} = command, operator, x0, y0, w, h, path)
       when operator in @operators and is_integer(x0) and is_integer(y0) and
            is_integer(w) and is_integer(h) and is_binary(path) do
-    path = String.replace(path, ~S|"|, ~S|\"|)
-    %{command | args: args ++ ["-draw", ~s|image #{operator} #{x0},#{y0} #{w},#{h} "#{path}"|]}
+    %{command | args: args ++ ["-draw", "image #{operator} #{x0},#{y0} #{w},#{h} #{escape(path)}"]}
+  end
+
+  defp escape(string) when is_binary(string) do
+    ~S|"| <> String.replace(string, ~S|"|, ~S|\"|) <> ~S|"|
   end
 end

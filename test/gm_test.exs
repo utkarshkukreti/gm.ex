@@ -18,4 +18,9 @@ defmodule GmTest do
     assert Gm.open("xc:red") |> Gm.resize(100, 100) ==
            %Gm.Command{args: ["xc:red", "-resize", "100x100"]}
   end
+
+  test "font/2" do
+    assert Gm.open("xc:red") |> Gm.font("test.ttf") ==
+           %Gm.Command{args: ["xc:red", "-font", "test.ttf"]}
+  end
 end

@@ -21,4 +21,8 @@ defmodule Gm do
       when is_integer(width) and is_integer(height) do
     %{command | args: args ++ ["-resize", "#{width}x#{height}"]}
   end
+
+  def font(%Command{args: args} = command, font) when is_binary(font) do
+    %{command | args: args ++ ["-font", font]}
+  end
 end

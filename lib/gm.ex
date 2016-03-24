@@ -26,9 +26,9 @@ defmodule Gm do
     %{command | args: args ++ ["-font", font]}
   end
 
-  def draw_text(%Command{args: args} = command, x0, y0, string)
-      when is_integer(x0) and is_integer(y0) and is_binary(string) do
-    %{command | args: args ++ ["-draw", "text #{x0},#{y0} #{escape(string)}"]}
+  def draw_text(%Command{args: args} = command, x, y, string)
+      when is_integer(x) and is_integer(y) and is_binary(string) do
+    %{command | args: args ++ ["-draw", "text #{x},#{y} #{escape(string)}"]}
   end
 
   def fill(%Command{args: args} = command, color) when is_binary(color) do
@@ -40,10 +40,10 @@ defmodule Gm do
   end
 
   @operators [:over] # TODO: Add more.
-  def draw_image(%Command{args: args} = command, operator, x0, y0, w, h, path)
-      when operator in @operators and is_integer(x0) and is_integer(y0) and
-           is_integer(w) and is_integer(h) and is_binary(path) do
-    %{command | args: args ++ ["-draw", "image #{operator} #{x0},#{y0} #{w},#{h} #{escape(path)}"]}
+  def draw_image(%Command{args: args} = command, operator, x, y, width, height, path)
+      when operator in @operators and is_integer(x) and is_integer(y) and
+           is_integer(width) and is_integer(height) and is_binary(path) do
+    %{command | args: args ++ ["-draw", "image #{operator} #{x},#{y} #{width},#{height} #{escape(path)}"]}
   end
 
   defp escape(string) when is_binary(string) do

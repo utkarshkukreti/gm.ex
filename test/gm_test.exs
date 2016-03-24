@@ -33,4 +33,9 @@ defmodule GmTest do
     assert Gm.open("xc:red") |> Gm.fill("green") ==
            %Gm.Command{args: ["xc:red", "-fill", "green"]}
   end
+
+  test "point_size/2" do
+    assert Gm.open("xc:red") |> Gm.point_size(36) ==
+           %Gm.Command{args: ["xc:red", "-pointsize", "36"]}
+  end
 end

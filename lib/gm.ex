@@ -35,4 +35,8 @@ defmodule Gm do
   def fill(%Command{args: args} = command, color) when is_binary(color) do
     %{command | args: args ++ ["-fill", color]}
   end
+
+  def point_size(%Command{args: args} = command, size) when is_integer(size) do
+    %{command | args: args ++ ["-pointsize", "#{size}"]}
+  end
 end

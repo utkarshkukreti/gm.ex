@@ -8,7 +8,8 @@ defmodule Gm.Mixfile do
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps,
-     description: "Idiomatic GraphicsMagick wrapper for Elixir."]
+     description: "Idiomatic GraphicsMagick wrapper for Elixir.",
+     package: package]
   end
 
   # Configuration for the OTP application
@@ -29,5 +30,11 @@ defmodule Gm.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     []
+  end
+
+  defp package do
+    [maintainers: ["Utkarsh Kukreti"],
+     licenses: ["MIT"],
+     links: %{"GitHub": "https://github.com/utkarshkukreti/gm.ex"}]
   end
 end

@@ -25,4 +25,10 @@ defmodule Gm do
   def font(%Command{args: args} = command, font) when is_binary(font) do
     %{command | args: args ++ ["-font", font]}
   end
+
+  def draw_text(%Command{args: args} = command, x0, y0, string)
+      when is_integer(x0) and is_integer(y0) and is_binary(string) do
+    string = String.replace(string, ~S|"|, ~S|\"|)
+    %{command | args: args ++ ["-draw", ~s|text #{x0},#{y0} "#{string}"|]}
+  end
 end

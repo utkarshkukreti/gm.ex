@@ -23,4 +23,9 @@ defmodule GmTest do
     assert Gm.open("xc:red") |> Gm.font("test.ttf") ==
            %Gm.Command{args: ["xc:red", "-font", "test.ttf"]}
   end
+
+  test "draw_text/4" do
+    assert Gm.open("xc:red") |> Gm.draw_text(0, 0, ~S|a'"|) ==
+           %Gm.Command{args: ["xc:red", "-draw", ~S|text 0,0 "a'\""|]}
+  end
 end

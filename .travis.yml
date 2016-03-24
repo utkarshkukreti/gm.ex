@@ -1,0 +1,8 @@
+language: elixir
+elixir:
+  - 1.2
+otp_release:
+  - 18.2
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y graphicsmagick

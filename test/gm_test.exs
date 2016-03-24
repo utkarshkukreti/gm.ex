@@ -13,4 +13,9 @@ defmodule GmTest do
     assert error =~ "Unable to open file"
     assert error =~ "test.jpg"
   end
+
+  test "resize/3" do
+    assert Gm.open("xc:red") |> Gm.resize(100, 100) ==
+           %Gm.Command{args: ["xc:red", "-resize", "100x100"]}
+  end
 end

@@ -16,4 +16,9 @@ defmodule Gm do
       {error, _} -> {:error, error}
     end
   end
+
+  def resize(%Command{args: args} = command, width, height)
+      when is_integer(width) and is_integer(height) do
+    %{command | args: args ++ ["-resize", "#{width}x#{height}"]}
+  end
 end

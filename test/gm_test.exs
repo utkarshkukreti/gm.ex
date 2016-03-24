@@ -38,4 +38,9 @@ defmodule GmTest do
     assert Gm.open("xc:red") |> Gm.point_size(36) ==
            %Gm.Command{args: ["xc:red", "-pointsize", "36"]}
   end
+
+  test "draw_image/7" do
+    assert Gm.open("xc:red") |> Gm.draw_image(:over, 0, 0, 50, 50, "xc:blue") ==
+           %Gm.Command{args: ["xc:red", "-draw", ~S|image over 0,0 50,50 "xc:blue"|]}
+  end
 end

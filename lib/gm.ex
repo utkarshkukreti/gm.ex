@@ -39,4 +39,12 @@ defmodule Gm do
   def point_size(%Command{args: args} = command, size) when is_integer(size) do
     %{command | args: args ++ ["-pointsize", "#{size}"]}
   end
+
+  @operators [:over] # TODO: Add more.
+  def draw_image(%Command{args: args} = command, operator, x0, y0, w, h, path)
+      when operator in @operators and is_integer(x0) and is_integer(y0) and
+           is_integer(w) and is_integer(h) and is_binary(path) do
+    path = String.replace(path, ~S|"|, ~S|\"|)
+    %{command | args: args ++ ["-draw", ~s|image #{operator} #{x0},#{y0} #{w},#{h} "#{path}"|]}
+  end
 end

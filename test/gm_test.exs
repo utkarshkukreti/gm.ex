@@ -2,7 +2,7 @@ defmodule GmTest do
   use ExUnit.Case
   doctest Gm
 
-  test "the truth" do
-    assert 1 + 1 == 2
+  test "open/1" do
+    assert Gm.open("test.jpg") == %Gm.Command{args: ["test.jpg"]}
   end
 end

@@ -28,4 +28,9 @@ defmodule GmTest do
     assert Gm.open("xc:red") |> Gm.draw_text(0, 0, ~S|a'"|) ==
            %Gm.Command{args: ["xc:red", "-draw", ~S|text 0,0 "a'\""|]}
   end
+
+  test "fill/2" do
+    assert Gm.open("xc:red") |> Gm.fill("green") ==
+           %Gm.Command{args: ["xc:red", "-fill", "green"]}
+  end
 end

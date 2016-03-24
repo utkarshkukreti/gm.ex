@@ -31,4 +31,8 @@ defmodule Gm do
     string = String.replace(string, ~S|"|, ~S|\"|)
     %{command | args: args ++ ["-draw", ~s|text #{x0},#{y0} "#{string}"|]}
   end
+
+  def fill(%Command{args: args} = command, color) when is_binary(color) do
+    %{command | args: args ++ ["-fill", color]}
+  end
 end

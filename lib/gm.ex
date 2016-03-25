@@ -46,6 +46,21 @@ defmodule Gm do
     %{command | args: args ++ ["-draw", "image #{operator} #{x},#{y} #{width},#{height} #{escape(path)}"]}
   end
 
+  @gravities %{:north_west => "NorthWest",
+               :north => "North",
+               :north_east => "NorthEast",
+               :west => "West",
+               :center => "Center",
+               :east => "East",
+               :south_west => "SouthWest",
+               :south => "South",
+               :south_east => "SouthEast"}
+  @gravities_keys Map.keys(@gravities)
+  def gravity(%Command{args: args} = command, gravity)
+      when gravity in @gravities_keys do
+    %{command | args: args ++ ["-gravity", @gravities[gravity]]}
+  end
+
   defp escape(string) when is_binary(string) do
     ~S|"| <> String.replace(string, ~S|"|, ~S|\"|) <> ~S|"|
   end

@@ -43,4 +43,15 @@ defmodule GmTest do
     assert Gm.open("xc:red") |> Gm.draw_image(:over, 0, 0, 50, 50, "xc:blue") ==
            %Gm.Command{args: ["xc:red", "-draw", ~S|image over 0,0 50,50 "xc:blue"|]}
   end
+
+  test "gravity/2" do
+    assert Gm.open("xc:red")
+           |> Gm.gravity(:north_west)
+           |> Gm.gravity(:center)
+           |> Gm.gravity(:south_east) ==
+           %Gm.Command{args: ["xc:red",
+                              "-gravity", "NorthWest",
+                              "-gravity", "Center",
+                              "-gravity", "SouthEast"]}
+  end
 end

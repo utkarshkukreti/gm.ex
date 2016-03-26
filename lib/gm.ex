@@ -21,6 +21,13 @@ defmodule Gm do
     end
   end
 
+  def write!(%Command{} = command, path) when is_binary(path) do
+    case write(command, path) do
+      :ok               -> :ok
+      {:error, message} -> raise %Error{message: message}
+    end
+  end
+
   def resize(%Command{args: args} = command, width, height)
       when is_integer(width) and is_integer(height) do
     %{command | args: args ++ ["-resize", "#{width}x#{height}"]}

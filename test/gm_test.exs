@@ -14,6 +14,14 @@ defmodule GmTest do
     assert error =~ "test.jpg"
   end
 
+  test "write!/2" do
+    assert :ok = Gm.open("xc:red") |> Gm.write!("_build/test.jpg")
+
+    assert_raise Gm.Error, ~r/Unable to open file/, fn ->
+      Gm.open("test.jpg") |> Gm.write!("_build/test.jpg")
+    end
+  end
+
   test "resize/3" do
     assert Gm.open("xc:red") |> Gm.resize(100, 100) ==
            %Gm.Command{args: ["xc:red", "-resize", "100x100"]}

@@ -3,6 +3,10 @@ defmodule Gm do
     defstruct args: []
   end
 
+  defmodule Error do
+    defexception [:message]
+  end
+
   def open(path) when is_binary(path) do
     %Command{args: [path]}
   end
